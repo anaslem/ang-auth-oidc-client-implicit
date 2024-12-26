@@ -9,6 +9,8 @@ import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { EventTypes, PublicEventsService } from 'angular-auth-oidc-client';
 import { filter } from 'rxjs';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './Interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AppRoutingModule,
     AuthConfigModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

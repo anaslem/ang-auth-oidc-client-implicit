@@ -1,0 +1,13 @@
+<h1>{{ title }}</h1>
+
+<!-- PDF Viewer -->
+<pdf-viewer
+  [src]="pdfSrc"
+  [render-text]="true"
+  [show-all]="true"
+  style="display: block;"
+></pdf-viewer>
+
+<!-- Dynamic PDF Upload -->
+<h2>Upload a PDF File</h2>
+<input type="file" accept="application/pdf" (change)="loadPdf($event)" />

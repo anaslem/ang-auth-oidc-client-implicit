@@ -1,0 +1,27 @@
+<!-- app.component.html -->
+<h1>Bar Chart Example</h1>
+
+<ngx-charts-bar-vertical
+  [view]="view"
+  [scheme]="'cool'"
+  [results]="data"
+  [gradient]="gradient"
+  [xAxis]="showXAxis"
+  [yAxis]="showYAxis"
+  [legend]="showLegend"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel"
+>
+</ngx-charts-bar-vertical>
+
+<h1>Basic Graph Example</h1>
+
+<ngx-graph
+  [links]="links"
+  [nodes]="nodes"
+  [layout]="layout"
+  [curve]="curve"
+>
+</ngx-graph>

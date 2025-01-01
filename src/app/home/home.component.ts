@@ -20,13 +20,7 @@ export class HomeComponent implements OnInit {
   checkSessionChanged$ = this.oidcSecurityService.checkSessionChanged$;
 
   ngOnInit(): void {
-    this.oidcSecurityService.isAuthenticated$.subscribe(
-      ({ isAuthenticated }) => {
-        this.isAuthenticated = isAuthenticated;
-
-        console.warn('isAuthenticated: ', isAuthenticated);
-      }
-    );
+    
   }
 
   login(): void {

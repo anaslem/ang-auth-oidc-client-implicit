@@ -20,4 +20,8 @@ export class AuthService {
   getUserData(){
     return this.oidcSecurityService.userData$;
   }
+
+  isAuthenticated() {
+    return this.oidcSecurityService.isAuthenticated$
+  }
 }

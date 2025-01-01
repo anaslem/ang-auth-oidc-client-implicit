@@ -15,6 +15,7 @@ import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
         startCheckSession: false,
         silentRenew: true,
         logLevel: LogLevel.Debug,
+        triggerAuthorizationResultEvent : true
       },
     }),
   ],

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
-import { Observable, take } from 'rxjs';
+import { Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class AuthService {
   constructor(private oidcSecurityService: OidcSecurityService) {}
 
   checkAuth(): Observable<any> {
-    return this.oidcSecurityService.checkAuthIncludingServer();
+    return this.oidcSecurityService.checkAuth();
   }
 
   login(){

@@ -5,51 +5,54 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
-export class AppComponent  implements OnInit {
+export class AppComponent implements OnInit {
   title = 'AuthOidcExemple';
-  currentRoute = '';
+  redirectUrlKey = 'RedirectUrlKey';
+  isAfterLogin = 'isAfterLogin';
 
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
 
   ngOnInit(): void {
-   this.initAhth();
+    this.initAhth();
   }
 
-  initAhth(){
-    this.storeRedirectUrl(window.location.pathname + window.location.search);
-    this.authService.checkAuth().subscribe((loginResponse) =>
-    {
-      if(!loginResponse.isAuthenticated)
-      {
+  initAhth() {
+    this.authService.checkAuth().subscribe((loginResponse) => {
+      if (!loginResponse.isAuthenticated) {
+        this.storeRedirectUrl(
+          window.location.pathname + window.location.search
+        );
         this.authService.login();
+      } else {
+        this.authService.getUserData().subscribe((userData) => {});
+        this.HandleRedirect();
       }
-      else{
-        this.authService.getUserData().subscribe((userData) => {
-        });
-        const url = this.getRedirectUrl();
-        if(url === '/')
-        {
-          this.router.navigateByUrl('/home')
-        }
-        else
-        {
-          this.router.navigateByUrl(url);
-        }
-      }
-    }
-    );
+    });
   }
 
-  private storeRedirectUrl (value : string) {
-    localStorage.setItem("RedirectUrlKey", JSON.stringify(value));
+  private HandleRedirect() {
+    const isfterLogin = localStorage.getItem(this.isAfterLogin);
+    const url =
+      isfterLogin === '1'
+        ? this.getRedirectUrl()
+        : window.location.pathname + window.location.search;
+    localStorage.removeItem(this.isAfterLogin);
+    if (url === '/') {
+      this.router.navigateByUrl('/home');
+    } else {
+      this.router.navigateByUrl(url);
+    }
+  }
+  private storeRedirectUrl(value: string) {
+    localStorage.setItem(this.redirectUrlKey, JSON.stringify(value));
+    localStorage.setItem(this.isAfterLogin, '1');
   }
 
   private getRedirectUrl() {
-    const path = localStorage.getItem("RedirectUrlKey") || '/';
+    const path = localStorage.getItem(this.redirectUrlKey) || '/';
     return JSON.parse(path);
   }
-  
 }

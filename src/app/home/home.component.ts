@@ -3,11 +3,10 @@ import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 @Component({
   selector: 'app-home',
-  standalone: false,
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   
   private readonly oidcSecurityService = inject(OidcSecurityService);
 
@@ -19,9 +18,6 @@ export class HomeComponent implements OnInit {
 
   checkSessionChanged$ = this.oidcSecurityService.checkSessionChanged$;
 
-  ngOnInit(): void {
-    
-  }
 
   login(): void {
     console.log('start login');

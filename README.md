@@ -37,3 +37,5 @@ migrate from tslint to eslint :
     @typescript-eslint/eslint-plugin
     @typescript-eslint/parser
     eslint
+
+some changes
